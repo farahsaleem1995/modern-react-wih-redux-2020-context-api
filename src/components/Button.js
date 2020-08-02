@@ -7,14 +7,14 @@ class Button extends React.Component {
     return language === "english" ? "submit" : "Voorleggen";
   };
 
-  renderBtn = (colorValue) => {
-    let className = `ui button ${
-      colorValue.color === "blue" ? "blue" : "red"
-    } ${colorValue.inverted ? "inverted" : ""}`;
+  renderBtn = (color, inverted) => {
+    let className = `ui button ${color === "blue" ? "blue" : "red"} ${
+      inverted ? "inverted" : ""
+    }`;
     return (
       <button className={className}>
         <LanguageContext.Consumer>
-          {(languageValue) => this.renderBtnText(languageValue.language)}
+          {({ language }) => this.renderBtnText(language)}
         </LanguageContext.Consumer>
       </button>
     );
@@ -23,7 +23,7 @@ class Button extends React.Component {
   render() {
     return (
       <ColorContext.Consumer>
-        {(colorValue) => this.renderBtn(colorValue)}
+        {({ color, inverted }) => this.renderBtn(color, inverted)}
       </ColorContext.Consumer>
     );
   }
